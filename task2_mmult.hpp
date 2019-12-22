@@ -1,8 +1,5 @@
-//
-// Created by aribaldi on 12/22/19.
-//
+#pragma once
+#include "utils.hpp"
 
-#ifndef TASK1_MMUL_TASK2_MMULT_CPP_HPP
-#define TASK1_MMUL_TASK2_MMULT_CPP_HPP
-
-#endif //TASK1_MMUL_TASK2_MMULT_CPP_HPP
+tuple<double, Matrix> matrixmultiply_sequantial(const Matrix &first, const Matrix &second);
+tuple<double, Matrix> matrixmultiply_parallel(const Matrix &first, Matrix &second);

@@ -1,8 +1,4 @@
-//
-// Created by aribaldi on 12/22/19.
-//
+#pragma once
+#include "utils.hpp"
 
-#ifndef TASK1_MMUL_TASK1_MAXMINSEARCH_CPP_HPP
-#define TASK1_MMUL_TASK1_MAXMINSEARCH_CPP_HPP
-
-#endif //TASK1_MMUL_TASK1_MAXMINSEARCH_CPP_HPP
+tuple<double, int32_t> getmaxmin (Matrix &testmat);

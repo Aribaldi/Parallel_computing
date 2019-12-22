@@ -1,8 +1,16 @@
-//
-// Created by aribaldi on 12/21/19.
-//
+#pragma once
 
-#ifndef TASK1_MMUL_UTILS_HPP
-#define TASK1_MMUL_UTILS_HPP
+#include <omp.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <random>
+#include <chrono>
 
-#endif //TASK1_MMUL_UTILS_HPP
+using namespace std;
+using namespace std::chrono;
+using Matrix = std::vector<std::vector<int32_t>>;
+
+Matrix GetRandomMatrix(size_t rows, size_t cols);
+void PrintMatrix(const Matrix& matrix);
+Matrix GetZeroMatrix(size_t rows, size_t cols);
