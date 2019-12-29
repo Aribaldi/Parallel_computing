@@ -4,7 +4,7 @@ Matrix GetRandomMatrix(size_t rows, size_t cols) {
     std::random_device dev;
     std::mt19937       rng(dev());
 
-    std::uniform_int_distribution<std::mt19937::result_type> dist(1, 500);
+    std::uniform_int_distribution<std::mt19937::result_type> dist(1, 25);
 
     Matrix matrix{rows};
 
@@ -44,5 +44,25 @@ Matrix GetZeroMatrix(size_t rows, size_t cols) {
     }
     return matrix;
 }
+
+vector<int32_t> get_random_vector(size_t cols) {
+    std::random_device dev;
+    std::mt19937       rng(dev());
+    std::uniform_int_distribution<std::mt19937::result_type> dist(1, 500);
+    vector<int32_t> vec(cols, 0);
+    for (size_t i = 0; i < cols; ++i)
+    {
+        vec[i] = static_cast<int>(dist(rng));
+    }
+    return vec;
+}
+
+void print_vector(const vector<int32_t> &vector) {
+    auto cols = vector.size();
+    for (int32_t i = 0; i < cols; ++i) {
+            cout << vector[i] << '\n';
+        }
+}
+
 
 
