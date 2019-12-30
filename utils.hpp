@@ -6,6 +6,9 @@
 #include <algorithm>
 #include <random>
 #include <chrono>
+#include <string>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 using namespace std::chrono;

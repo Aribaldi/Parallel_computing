@@ -1,7 +1,3 @@
-//
-// Created by aribaldi on 12/23/19.
-//
-
 #include "task3_mvmult.hpp"
 
 tuple<double, vector<int32_t>> mvmultiply_sequential(Matrix &matrix, vector<int32_t> &vec) {
@@ -21,7 +17,7 @@ tuple<double, vector<int32_t>> mvmultiply_tape_rows(Matrix &matrix, vector<int32
     std::vector<int32_t> res(matrix.size(), 0);
     auto start = high_resolution_clock::now();
     int i, j;
-    #pragma omp parallel for default(none) shared(i, matrix, vec, res) private(j) num_threads(4)
+    #pragma omp parallel for default(none) shared(i, matrix, vec, res) private(j) num_threads(8)
         for (i = 0; i < matrix.size() ; ++i) {
             for (j = 0; j < vec.size() ; ++j) {
                 res[i] += matrix[i][j] * vec[j];
@@ -36,9 +32,10 @@ tuple<double, vector<int32_t>> mvmultiply_tape_cols(Matrix &matrix, vector<int32
     std::vector<int32_t> res(matrix.size(), 0);
     auto start = high_resolution_clock::now();
     int i, j;
-    #pragma omp parallel for default(none) shared(j, matrix, vec, res) private(i) num_threads(4)
-    for (i = 0; i < matrix.size() ; ++i) {
-        for (j = 0; j < vec.size() ; ++j) {
+#pragma omp parallel for default(none) shared(j, matrix, vec, res) private(i) num_threads(8)
+    for (j = 0; j < matrix.begin()->size() ; ++j) {
+        for (i = 0; i < vec.size() ; ++i) {
+            #pragma omp atomic
             res[i] += matrix[i][j] * vec[j];
         }
     }
@@ -51,7 +48,7 @@ tuple<double, vector<int32_t>> mvmultiply_block(Matrix &matrix, vector<int32_t> 
     std::vector<int32_t> res(matrix.size(), 0);
     auto start = high_resolution_clock::now();
     int i, j;
-    #pragma omp parallel default(none) shared(matrix, vec, res) private(i, j) num_threads(4)
+    #pragma omp parallel default(none) shared(matrix, vec, res) private(i, j) num_threads(8)
     {
         int32_t s  = omp_get_num_threads();
         int32_t h = static_cast<int32_t>(matrix.size() / s);
